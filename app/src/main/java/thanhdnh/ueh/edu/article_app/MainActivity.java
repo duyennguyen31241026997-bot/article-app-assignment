@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     getSupportActionBar().hide();
 
     gridview = findViewById(R.id.gridview);
-    new ArticleData(getBaseContext(), gridview).loadData("https://raw.githubusercontent.com/thanhdnh/json/main/products.json", this);
+    new ArticleData(getBaseContext(), gridview).loadData("https://gist.githubusercontent.com/duyennguyen31241026997-bot/93664b30f9adb103a99647f53ad3dbde/raw/6f76015aeace2a16ee8346442deb9c6deaf7700f/users.json", this);
     gridview.setOnItemClickListener(onitemclick);
   }
 

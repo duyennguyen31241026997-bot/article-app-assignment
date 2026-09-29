@@ -9,8 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.squareup.picasso.Picasso;
 
 public class ViewArticleActivity extends AppCompatActivity {
-  ImageView iv_detail;
-  TextView tv_detail_title, tv_detail_description;
+  ImageView iv_detail_avatar;
+  TextView tv_detail_username, tv_detail_email, tv_detail_hobby, tv_detail_description;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -18,14 +18,21 @@ public class ViewArticleActivity extends AppCompatActivity {
     setContentView(R.layout.activity_view_article);
     getSupportActionBar().hide();
 
-    iv_detail = findViewById(R.id.iv_detail);
-    tv_detail_title = findViewById(R.id.tv_detail_title);
+    iv_detail_avatar = findViewById(R.id.iv_detail_avatar);
+    tv_detail_username = findViewById(R.id.tv_detail_username);
+    tv_detail_email = findViewById(R.id.tv_detail_email);
+    tv_detail_hobby = findViewById(R.id.tv_detail_hobby);
     tv_detail_description = findViewById(R.id.tv_detail_description);
 
     int id = (int) getIntent().getLongExtra("id", 0);
 
-    Picasso.get().load(ArticleData.getPhotoFromId(id).getArticle_image()).resize(400, 500).centerCrop().into(iv_detail);
-    tv_detail_title.setText(ArticleData.getPhotoFromId(id).getArticle_title());
-    tv_detail_description.setText(ArticleData.getPhotoFromId(id).getArticle_description());
+    UserProfile user = ArticleData.getPhotoFromId(id);
+    if (user != null) {
+      Picasso.get().load(user.getAvatarUrl()).resize(400, 500).centerCrop().into(iv_detail_avatar);
+      tv_detail_username.setText(user.getUserName());
+      tv_detail_email.setText(user.getEmail());
+      tv_detail_hobby.setText(user.getHobby());
+      tv_detail_description.setText(user.getDescription());
+    }
   }
 }
